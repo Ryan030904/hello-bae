@@ -1,0 +1,250 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.background {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('bg2.jpg') center/cover no-repeat;
+  filter: blur(5px) brightness(0.7);
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+.popup {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #183153 80%, #274472 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  padding: 30px 24px 24px 24px;
+  text-align: center;
+  z-index: 2;
+  min-width: 320px;
+  max-width: 350px;
+}
+
+.cat-img, .dog-img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+
+.popup h2 {
+  color: #fff;
+  margin: 0 0 10px 0;
+  font-size: 2em;
+}
+
+.popup p {
+  color: #e0e0e0;
+  margin-bottom: 30px;
+}
+
+#ok-btn {
+  padding: 10px 30px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 8px;
+  background: #4a90e2;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#ok-btn:hover {
+  background: #357ab8;
+}
+
+.question-page {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 40px;
+}
+
+.big-title {
+  font-size: 3em;
+  font-family: 'Pacifico', 'Segoe Script', cursive, sans-serif;
+  color: #fff;
+  margin-bottom: 0.2em;
+  text-align: center;
+  text-shadow: 4px 4px 16px #000, 0 0 8px #000, 0 0 2px #000;
+  font-weight: bold;
+}
+
+.emoji {
+  font-size: 1.2em;
+  margin-left: 0.1em;
+}
+
+.subtitle {
+  font-size: 1.3em;
+  font-family: 'Segoe Script', cursive, sans-serif;
+  color: #fff;
+  margin-bottom: 2em;
+  text-align: center;
+  text-shadow: 3px 3px 12px #000, 0 0 6px #000, 0 0 2px #000;
+  font-weight: bold;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+}
+
+.btn-group .btn {
+  pointer-events: auto;
+}
+
+.no-btn {
+  position: fixed;
+  z-index: 2;
+}
+
+.yes-btn {
+  position: static;
+  z-index: 2;
+}
+
+.btn {
+  font-size: 1.2em;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, color 0.2s;
+}
+
+.no-btn {
+  background: #1cb6d7;
+  color: #fff;
+}
+
+.no-btn:hover {
+  background: #0e7c9b;
+}
+
+.yes-btn {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.yes-btn:hover {
+  background: #b93222;
+}
+
+.reason-popup {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(20, 30, 60, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  padding: 40px 30px 30px 30px;
+  text-align: center;
+  z-index: 100;
+  min-width: 900px;
+  width: 900px;
+}
+
+.reason-popup h2 {
+  color: #fff;
+  font-size: 2.2em;
+  margin-bottom: 20px;
+}
+
+#reason-input {
+  width: 98%;
+  font-size: 1.4em;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #4a90e2;
+  margin-bottom: 24px;
+  outline: none;
+}
+
+.secret-msg {
+  margin-top: 18px;
+  background: #ff9980;
+  color: #fff;
+  font-size: 1.1em;
+  border-radius: 8px;
+  padding: 10px 36px;
+  display: block;
+  font-weight: bold;
+  transition: opacity 0.2s;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+.result-popup {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(20, 30, 60, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  padding: 30px 30px 24px 30px;
+  text-align: center;
+  z-index: 200;
+  min-width: 1000px;
+  width: 1000px;
+}
+
+.result-popup h2 {
+  color: #fff;
+  font-size: 2.2em;
+  margin-bottom: 10px;
+}
+
+.result-msg {
+  color: #e0e0e0;
+  font-size: 1.3em;
+  margin-bottom: 0;
+}
+
+.share-btn {
+  margin-top: 28px;
+  background: #9ee7e2;
+  color: #18797c;
+  font-size: 1.3em;
+  border-radius: 10px;
+  padding: 16px 32px;
+  display: block;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s, color 0.2s;
+}
+
+.share-btn:hover {
+  background: #7ed6d0;
+  color: #125e5e;
+} 
