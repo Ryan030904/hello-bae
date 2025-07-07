@@ -46,9 +46,17 @@
   </form>
   <script src="script.js"></script>
   <script>
-    document.getElementById('ahihi-btn').onclick = function() {
-      document.getElementById('notifyForm').submit();
-      alert('Cảm ơn bạn đã nhấn ahihi><!');
+    document.getElementById('ahihi-btn').onclick = function(e) {
+      e.preventDefault();
+      fetch("https://formspree.io/f/xpwrgzdr", {
+        method: "POST",
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: "Có người vừa nhấn nút ahihi>< trên trang web!" })
+      }).then(function() {
+        alert('Cảm ơn bạn đã nhấn ahihi><!');
+        document.getElementById('result-popup').style.display = 'none';
+        document.querySelector('.question-page').style.display = 'block';
+      });
     };
   </script>
 </body>
