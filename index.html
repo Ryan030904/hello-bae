@@ -56,8 +56,33 @@
         alert('Cảm ơn bạn đã nhấn ahihi><!');
         document.getElementById('result-popup').style.display = 'none';
         document.querySelector('.question-page').style.display = 'block';
+        resetNoBtnPosition();
+        enableNoBtnDodge();
       });
     };
+
+    function enableNoBtnDodge() {
+      const noBtn = document.getElementById('no-btn');
+      noBtn.onmouseover = function() {
+        const btnGroup = document.querySelector('.btn-group');
+        const btnWidth = noBtn.offsetWidth;
+        const btnHeight = noBtn.offsetHeight;
+        const maxX = btnGroup.offsetWidth - btnWidth;
+        const maxY = btnGroup.offsetHeight - btnHeight;
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+        noBtn.style.position = 'absolute';
+        noBtn.style.left = randomX + 'px';
+        noBtn.style.top = randomY + 'px';
+      };
+    }
+
+    function resetNoBtnPosition() {
+      const noBtn = document.getElementById('no-btn');
+      noBtn.style.position = 'static';
+      noBtn.style.left = '';
+      noBtn.style.top = '';
+    }
   </script>
 </body>
 </html> 
