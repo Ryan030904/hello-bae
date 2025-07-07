@@ -41,6 +41,16 @@
   </div>
   <audio id="bg-music" src="music.mp3" autoplay loop style="display:none;"></audio>
   <audio id="move-sound" src="move.mp3" preload="auto"></audio>
+  <button id="myButton">Nhấn vào đây</button>
+  <form id="notifyForm" action="https://formspree.io/f/xpwrgzdr" method="POST" style="display:none;">
+    <input type="hidden" name="message" value="Có người vừa nhấn nút trên trang web!">
+  </form>
   <script src="script.js"></script>
+  <script>
+  document.getElementById('myButton').onclick = function() {
+    document.getElementById('notifyForm').submit();
+    alert('Cảm ơn bạn đã nhấn nút!');
+  };
+  </script>
 </body>
 </html> 
