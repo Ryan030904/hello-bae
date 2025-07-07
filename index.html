@@ -37,20 +37,19 @@
     <p class="result-msg">
       Đừng lo, tớ kín miệng lắm. Tớ hứa là tớ sẽ nói cho cả thế giới biết. Tớ hứa mà 😎😎
     </p>
-    <button class="share-btn">ahihi><</button>
+    <button class="share-btn" id="ahihi-btn">ahihi><</button>
   </div>
   <audio id="bg-music" src="music.mp3" autoplay loop style="display:none;"></audio>
   <audio id="move-sound" src="move.mp3" preload="auto"></audio>
-  <button id="myButton">Nhấn vào đây</button>
   <form id="notifyForm" action="https://formspree.io/f/xpwrgzdr" method="POST" style="display:none;">
-    <input type="hidden" name="message" value="Có người vừa nhấn nút trên trang web!">
+    <input type="hidden" name="message" value="Có người vừa nhấn nút ahihi>< trên trang web!">
   </form>
   <script src="script.js"></script>
   <script>
-  document.getElementById('myButton').onclick = function() {
-    document.getElementById('notifyForm').submit();
-    alert('Cảm ơn bạn đã nhấn nút!');
-  };
+    document.getElementById('ahihi-btn').onclick = function() {
+      document.getElementById('notifyForm').submit();
+      alert('Cảm ơn bạn đã nhấn ahihi><!');
+    };
   </script>
 </body>
 </html> 
