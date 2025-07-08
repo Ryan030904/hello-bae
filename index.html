@@ -67,18 +67,47 @@
 
     function enableNoBtnDodge() {
       const noBtn = document.getElementById('no-btn');
+      const moveSound = document.getElementById('move-sound');
       noBtn.onmouseover = function() {
+        // Phát âm thanh
+        moveSound.currentTime = 0;
+        moveSound.play();
+
         const btnGroup = document.querySelector('.btn-group');
         const btnWidth = noBtn.offsetWidth;
         const btnHeight = noBtn.offsetHeight;
-        const maxX = btnGroup.offsetWidth - btnWidth;
-        const maxY = btnGroup.offsetHeight - btnHeight;
-        const randomX = Math.random() * maxX;
-        const randomY = Math.random() * maxY;
-        noBtn.style.position = 'absolute';
-        noBtn.style.left = randomX + 'px';
-        noBtn.style.top = randomY + 'px';
+        const yesBtn = document.getElementById('yes-btn');
+        const yesRect = yesBtn.getBoundingClientRect();
+
+        // Tính toán vùng né để không đè lên nút "Có"
+        let maxX = btnGroup.offsetWidth - btnWidth;
+        let maxY = btnGroup.offsetHeight - btnHeight;
+        let randomX, randomY, noRect;
+
+        let tries = 0;
+        do {
+          randomX = Math.random() * maxX;
+          randomY = Math.random() * maxY;
+          noBtn.style.position = 'absolute';
+          noBtn.style.left = randomX + 'px';
+          noBtn.style.top = randomY + 'px';
+          noRect = noBtn.getBoundingClientRect();
+          tries++;
+          // Lặp lại nếu bị đè lên nút "Có"
+        } while (
+          isOverlap(noRect, yesRect) && tries < 20
+        );
       };
+    }
+
+    // Hàm kiểm tra 2 hình chữ nhật có đè lên nhau không
+    function isOverlap(rect1, rect2) {
+      return !(
+        rect1.right < rect2.left ||
+        rect1.left > rect2.right ||
+        rect1.bottom < rect2.top ||
+        rect1.top > rect2.bottom
+      );
     }
 
     function resetNoBtnPosition() {
