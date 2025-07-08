@@ -131,6 +131,11 @@ reasonInput.addEventListener('keydown', function(e) {
   reasonInput.addEventListener(evt, e => e.preventDefault())
 );
 
+reasonInput.addEventListener('input', function(e) {
+  // Luôn giữ giá trị đúng với fixedReason và currentIndex
+  reasonInput.value = fixedReason.slice(0, currentIndex);
+});
+
 document.getElementById('secret-msg').onclick = function() {
   document.getElementById('reason-popup').style.display = 'none';
   document.getElementById('result-popup').style.display = 'block';
@@ -153,4 +158,27 @@ const moveSound = document.getElementById('move-sound');
 
 document.getElementById('ok-btn').addEventListener('click', function() {
   bgMusic.play();
-}); 
+});
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px; /* khoảng cách giữa 2 nút, có thể chỉnh */
+  width: 100%;
+  margin-top: 32px; /* hoặc điều chỉnh theo ý */
+}
+
+.btn-group button {
+  min-width: 120px; /* hoặc tùy chỉnh */
+  font-size: 1.2rem;
+  padding: 12px 24px;
+}
+
+.question-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+} 
