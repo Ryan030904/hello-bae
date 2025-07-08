@@ -102,16 +102,23 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  width: 100%;
+  height: auto;
+  position: static;
+  pointer-events: auto;
 }
 
-.btn-group .btn {
-  pointer-events: auto;
+.btn {
+  min-width: 120px;
+  font-size: 1.1rem;
+  padding: 12px 0;
+  border-radius: 12px;
+  text-align: center;
+  flex: 1 1 40%;
+  max-width: 160px;
 }
 
 .no-btn {
@@ -122,16 +129,6 @@ body, html {
 .yes-btn {
   position: static;
   z-index: 2;
-}
-
-.btn {
-  font-size: 1.2em;
-  padding: 12px 32px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-family: inherit;
-  transition: background 0.2s, color 0.2s;
 }
 
 .no-btn {
@@ -154,16 +151,19 @@ body, html {
 
 .reason-popup {
   position: fixed;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: rgba(20, 30, 60, 0.95);
+  z-index: 1000;
+  overflow: auto;
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-  padding: 40px 30px 30px 30px;
+  padding: 24px 8px;
   text-align: center;
-  z-index: 100;
-  min-width: 900px;
-  width: 900px;
 }
 
 .reason-popup h2 {
@@ -173,12 +173,14 @@ body, html {
 }
 
 #reason-input {
-  width: 98%;
-  font-size: 1.4em;
-  padding: 10px;
+  width: 90vw;
+  max-width: 350px;
+  font-size: 1.1rem;
+  padding: 12px;
   border-radius: 8px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
   border: 2px solid #4a90e2;
-  margin-bottom: 24px;
   outline: none;
 }
 
@@ -271,16 +273,34 @@ body, html {
   .btn-group {
     flex-direction: column !important;
     align-items: center !important;
-    gap: 16px !important;
+    gap: 12px !important;
+    width: 100% !important;
+    position: static !important;
+    margin-top: 16px !important;
   }
   .btn, .yes-btn, .no-btn, .share-btn, .secret-msg {
     font-size: 1.1em !important;
-    padding: 12px 24px !important;
+    padding: 12px 0 !important;
+    width: 90vw !important;
+    max-width: 300px !important;
+    margin: 0 auto !important;
   }
-  input[type="text"] {
-    font-size: 1.1em !important;
-    padding: 10px !important;
+  .reason-popup {
+    padding: 0 10px !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: unset !important;
+    max-width: unset !important;
+  }
+  #reason-input {
     width: 90vw !important;
     max-width: 95vw !important;
+    font-size: 1.1rem !important;
+    padding: 12px !important;
+  }
+  .big-title, .subtitle {
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 0 10px;
   }
 } 
