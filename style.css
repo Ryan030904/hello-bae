@@ -249,89 +249,38 @@ body, html {
   color: #125e5e;
 }
 
-/* Responsive cho popup và các thành phần trên mobile */
+/* Responsive cho mobile */
 @media (max-width: 600px) {
-  .popup, .question-page, .reason-popup, .result-popup {
+  .popup,
+  .question-page,
+  .reason-popup,
+  .result-popup {
     width: 95vw !important;
-    min-width: 0 !important;
-    max-width: 98vw !important;
-    padding: 16px 6px !important;
-    border-radius: 16px !important;
-    font-size: 1rem !important;
-    box-sizing: border-box;
+    max-width: 95vw !important;
+    min-width: unset !important;
+    padding: 24px 8px !important;
+    font-size: 1.1em !important;
   }
-  .big-title, .popup h2, .result-popup h2, .reason-popup h2 {
-    font-size: 1.2rem !important;
-    word-break: break-word;
+  .popup img.dog-img {
+    width: 80px !important;
+    height: 80px !important;
   }
-  .subtitle, .result-msg, .popup p {
-    font-size: 0.95rem !important;
-    word-break: break-word;
+  .big-title, .popup h2, .reason-popup h2, .result-popup h2 {
+    font-size: 1.3em !important;
   }
   .btn-group {
     flex-direction: column !important;
     align-items: center !important;
-    gap: 10px !important;
-    position: relative !important;
+    gap: 16px !important;
   }
-  .btn, .no-btn, .yes-btn, .share-btn, .secret-msg {
-    width: 90vw !important;
-    max-width: 300px !important;
-    font-size: 1rem !important;
-    margin: 6px 0 !important;
-    box-sizing: border-box;
+  .btn, .yes-btn, .no-btn, .share-btn, .secret-msg {
+    font-size: 1.1em !important;
+    padding: 12px 24px !important;
   }
-  .reason-popup input[type="text"] {
+  input[type="text"] {
+    font-size: 1.1em !important;
+    padding: 10px !important;
     width: 90vw !important;
     max-width: 95vw !important;
-    font-size: 1rem !important;
-    padding: 8px !important;
-    margin: 10px 0 !important;
-    box-sizing: border-box;
-    border-radius: 8px;
   }
-  .dog-img {
-    width: 80px !important;
-    height: 80px !important;
-    object-fit: cover;
-    border-radius: 12px;
-  }
-}
-
-/* Đảm bảo input không bị tràn trên mọi thiết bị */
-.reason-popup input[type="text"] {
-  width: 60%;
-  max-width: 400px;
-  font-size: 1.1rem;
-  padding: 8px;
-  margin: 10px 0;
-  box-sizing: border-box;
-  border-radius: 8px;
-}
-
-/* Đảm bảo popup căn giữa và không bị tràn */
-.popup, .question-page, .reason-popup, .result-popup {
-  max-width: 500px;
-  min-width: 320px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-/* Đảm bảo nút không bị tràn ra ngoài */
-.btn-group {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 20px;
-  position: relative;
-}
-
-.btn, .no-btn, .yes-btn, .share-btn, .secret-msg {
-  min-width: 100px;
-  max-width: 200px;
-  font-size: 1.1rem;
-  padding: 10px 16px;
-  border-radius: 8px;
-  margin: 6px 0;
-  box-sizing: border-box;
 } 
