@@ -51,19 +51,9 @@
   </form>
   <script src="script.js"></script>
   <script>
-    document.getElementById('ahihi-btn').onclick = function(e) {
-      e.preventDefault();
-      fetch("https://formspree.io/f/xpwrgzdr", {
-        method: "POST",
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: "Có người vừa nhấn nút ahihi>< trên trang web!" })
-      }).then(function() {
-        alert('Cảm ơn bạn đã nhấn ahihi><!');
-        document.getElementById('result-popup').style.display = 'none';
-        document.querySelector('.question-page').style.display = 'block';
-        resetNoBtnPosition();
-        enableNoBtnDodge();
-      });
+    document.getElementById('ok-btn').onclick = function() {
+      document.querySelector('.popup').style.display = 'none';
+      document.querySelector('.question-page').style.display = 'flex'; // ĐÚNG
     };
 
     function enableNoBtnDodge() {
@@ -117,6 +107,27 @@
       noBtn.style.left = '';
       noBtn.style.top = '';
     }
+
+    document.getElementById('ahihi-btn').onclick = function() {
+      fetch("https://formspree.io/f/xpwrgzdr", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: "message=Có người vừa nhấn nút ahihi>< trên trang web!"
+      }).then(response => {
+        // Ẩn popup kết quả
+        document.getElementById('result-popup').style.display = 'none';
+        // Hiện lại giao diện câu hỏi
+        document.querySelector('.question-page').style.display = 'flex';
+        // Reset input và trạng thái nếu cần
+        document.getElementById('reason-input').value = "";
+        document.getElementById('secret-msg').style.display = 'none';
+        // Đặt lại vị trí nút nếu cần
+        setInitialBtnPositions();
+      });
+    };
   </script>
 </body>
 </html> 
