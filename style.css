@@ -319,32 +319,47 @@ body, html {
   }
 }
 
+.btn, .no-btn, .yes-btn {
+  font-size: 0.85em;
+  padding: 4px 10px;
+  min-width: 80px;
+  max-width: 120px;
+  width: auto;
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0;
+  border-radius: 8px;
+  white-space: normal;      /* Cho phép xuống dòng nếu cần */
+  overflow: visible;        /* Không cắt chữ */
+  text-overflow: unset;
+  display: inline-block;
+  position: static !important;
+  left: unset !important;
+  top: unset !important;
+}
+
 @media (max-width: 600px) {
-  .btn-group {
-    flex-direction: row !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 10px !important;
-    width: 100vw !important;
-    left: 0 !important;
-    position: static !important;
-  }
   .btn, .no-btn, .yes-btn {
-    font-size: 0.95em;
-    padding: 6px 0;
-    width: 140px;         /* hoặc 120px, 130px tuỳ ý */
-    min-width: 80px;
-    max-width: 160px;
-    box-sizing: border-box;
-    text-align: center;
-    margin: 0;
-    border-radius: 8px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block;
-    position: static !important; /* Đảm bảo không bị fixed */
-    left: unset !important;
-    top: unset !important;
+    font-size: 0.95em !important;
+    padding: 6px 10px !important;
+    min-width: 90px !important;
+    max-width: 130px !important;
+    width: auto !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
   }
+  .btn-group {
+    gap: 10px !important;
+  }
+}
+
+function resetBtnPositions() {
+  yesBtn.style.position = "static";
+  yesBtn.style.left = "";
+  yesBtn.style.top = "";
+
+  noBtn.style.position = "static";
+  noBtn.style.left = "";
+  noBtn.style.top = "";
 }
