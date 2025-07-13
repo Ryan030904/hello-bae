@@ -103,9 +103,13 @@
 
     function resetNoBtnPosition() {
       const noBtn = document.getElementById('no-btn');
-      noBtn.style.position = 'static';
-      noBtn.style.left = '';
-      noBtn.style.top = '';
+      if (window.innerWidth <= 600) {
+        noBtn.style.position = "static";
+        noBtn.style.left = "";
+        noBtn.style.top = "";
+      } else {
+        setInitialBtnPositions();
+      }
     }
 
     document.getElementById('ahihi-btn').onclick = function() {
