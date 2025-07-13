@@ -100,12 +100,13 @@ body, html {
 
 .btn-group {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: 32px; /* hoặc 24px, 20px tuỳ ý */
   margin-top: 24px;
   position: relative;
-  left: -40px;
+  left: 0;
 }
 
 .btn-group .btn {
@@ -316,4 +317,34 @@ body, html {
     left: -10px;
     gap: 12px;
   }
-} 
+}
+
+@media (max-width: 600px) {
+  .btn-group {
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: 100vw !important;
+    left: 0 !important;
+    position: static !important;
+  }
+  .btn, .no-btn, .yes-btn {
+    font-size: 0.95em;
+    padding: 6px 0;
+    width: 140px;         /* hoặc 120px, 130px tuỳ ý */
+    min-width: 80px;
+    max-width: 160px;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 0;
+    border-radius: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    position: static !important; /* Đảm bảo không bị fixed */
+    left: unset !important;
+    top: unset !important;
+  }
+}
