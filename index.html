@@ -103,13 +103,13 @@
     }
 
     function resetNoBtnPosition() {
-      const noBtn = document.getElementById('no-btn');
-      if (window.innerWidth <= 600) {
+      if (window.innerWidth <= 700) {
         noBtn.style.position = "static";
         noBtn.style.left = "";
         noBtn.style.top = "";
+        noBtn.style.transform = "";
       } else {
-        // setInitialBtnPositions(); // This line was removed as per the edit hint
+        setInitialBtnPositions();
       }
     }
 
@@ -122,15 +122,11 @@
         },
         body: "message=Có người vừa nhấn nút ahihi>< trên trang web!"
       }).then(response => {
-        // Ẩn popup kết quả
         document.getElementById('result-popup').style.display = 'none';
-        // Hiện lại giao diện câu hỏi
         document.querySelector('.question-page').style.display = 'flex';
-        // Reset input và trạng thái nếu cần
         document.getElementById('reason-input').value = "";
         document.getElementById('secret-msg').style.display = 'none';
-        // Đặt lại vị trí nút nếu cần
-        resetNoBtnPosition();
+        resetNoBtnPosition(); // <-- Sử dụng hàm này!
       });
     };
   </script>
