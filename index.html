@@ -103,13 +103,9 @@
 
     function resetNoBtnPosition() {
       const noBtn = document.getElementById('no-btn');
-      if (window.innerWidth <= 600) {
-        noBtn.style.position = "static";
-        noBtn.style.left = "";
-        noBtn.style.top = "";
-      } else {
-        setInitialBtnPositions();
-      }
+      noBtn.style.position = 'static';
+      noBtn.style.left = '';
+      noBtn.style.top = '';
     }
 
     document.getElementById('ahihi-btn').onclick = function() {
@@ -132,17 +128,6 @@
         setInitialBtnPositions();
       });
     };
-
-    function resetBtnPositions() {
-      // Reset style cho cả hai nút về mặc định
-      yesBtn.style.position = "";
-      yesBtn.style.left = "";
-      yesBtn.style.top = "";
-
-      noBtn.style.position = "";
-      noBtn.style.left = "";image.png
-      noBtn.style.top = "";
-    }
   </script>
 </body>
 </html> 

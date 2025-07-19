@@ -100,12 +100,11 @@ body, html {
 
 .btn-group {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 32px; /* hoặc 24px, 20px tuỳ ý */
+  gap: 32px;
   margin-top: 24px;
-  position: relative;
+  position: static; /* Không bị lệch khi reset */
   left: 0;
 }
 
@@ -113,13 +112,8 @@ body, html {
   pointer-events: auto;
 }
 
-.no-btn {
-  position: fixed;
-  z-index: 2;
-}
-
-.yes-btn {
-  position: static;
+.no-btn, .yes-btn {
+  position: static; /* Đảm bảo không bị cố định vị trí */
   z-index: 2;
 }
 
@@ -258,108 +252,58 @@ body, html {
   color: #125e5e;
 }
 
-/* Responsive cho mobile */
-@media (max-width: 600px) {
+
+/* ======================= RESPONSIVE CHO MOBILE ======================= */
+@media (max-width: 768px) {
   .popup,
   .question-page,
   .reason-popup,
   .result-popup {
-    width: 95vw !important;
-    max-width: 95vw !important;
-    min-width: unset !important;
-    padding: 24px 8px !important;
-    font-size: 1.1em !important;
+      width: 95vw !important;
+      max-width: 95vw !important;
+      padding: 24px 8px !important;
+      font-size: 1.1em !important;
   }
+
   .popup img.dog-img {
-    width: 80px !important;
-    height: 80px !important;
+      width: 80px !important;
+      height: 80px !important;
   }
+
   .big-title, .popup h2, .reason-popup h2, .result-popup h2 {
-    font-size: 1.3em !important;
+      font-size: 1.3em !important;
   }
+
   .btn-group {
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 16px !important;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      position: static;
+      margin: 20px auto 0;
   }
-  .btn, .yes-btn, .no-btn, .share-btn, .secret-msg {
-    font-size: 1.1em !important;
-    padding: 12px 24px !important;
+
+  .btn, .yes-btn, .no-btn {
+      width: auto;
+      padding: 12px 24px;
+      font-size: 1.1em;
+      position: static;
   }
-  input[type="text"] {
-    font-size: 1.1em !important;
-    padding: 10px !important;
-    width: 90vw !important;
-    max-width: 95vw !important;
+
+  input[type="text"], textarea {
+      font-size: 1.1em;
+      padding: 10px;
+      width: 90vw;
+      max-width: 95vw;
   }
+
   .reason-popup {
-    min-width: unset;
-    width: 95vw;
-    max-width: 98vw;
-    padding: 18px 6vw 18px 6vw;
+      width: 95vw;
+      padding: 18px 6vw 18px 6vw;
   }
+
   #reason-input {
-    width: 100%;
-    max-width: 100%;
+      width: 100%;
+      max-width: 100%;
   }
-}
-
-@media (max-width: 700px) {
-  .reason-popup {
-    width: 98vw;
-    max-width: 99vw;
-    padding: 18px 2vw 18px 2vw;
-  }
-  #reason-input {
-    max-width: 100%;
-  }
-  .btn-group {
-    left: -10px;
-    gap: 12px;
-  }
-}
-
-.btn, .no-btn, .yes-btn {
-  font-size: 0.85em;
-  padding: 4px 10px;
-  min-width: 80px;
-  max-width: 120px;
-  width: auto;
-  box-sizing: border-box;
-  text-align: center;
-  margin: 0;
-  border-radius: 8px;
-  white-space: normal;      /* Cho phép xuống dòng nếu cần */
-  overflow: visible;        /* Không cắt chữ */
-  text-overflow: unset;
-  display: inline-block;
-  position: static !important;
-  left: unset !important;
-  top: unset !important;
-}
-
-@media (max-width: 600px) {
-  .btn, .no-btn, .yes-btn {
-    font-size: 0.95em !important;
-    padding: 6px 10px !important;
-    min-width: 90px !important;
-    max-width: 130px !important;
-    width: auto !important;
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: unset !important;
-  }
-  .btn-group {
-    gap: 10px !important;
-  }
-}
-
-function resetBtnPositions() {
-  yesBtn.style.position = "static";
-  yesBtn.style.left = "";
-  yesBtn.style.top = "";
-
-  noBtn.style.position = "static";
-  noBtn.style.left = "";
-  noBtn.style.top = "";
 }
