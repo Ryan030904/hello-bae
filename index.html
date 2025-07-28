@@ -28,7 +28,7 @@
       Bất ngờ chưa!!! Bị lừa rồi ahihi! Không trả lời mà thoát ra tức là có đó nha :v
     </p>
     <div class="btn-group">
-      <button class="btn no-btn" id="no-btn">Không 😡😡</button>
+      <button class="btn no-btn" id="no-btn">Không 😠😠</button>
       <button class="btn yes-btn" id="yes-btn">Có 🤣🤣</button>
     </div>
   </div>
@@ -53,14 +53,14 @@
   <script>
     document.getElementById('ok-btn').onclick = function() {
       document.querySelector('.popup').style.display = 'none';
-      document.querySelector('.question-page').style.display = 'flex'; // ĐÚNG
+      document.querySelector('.question-page').style.display = 'flex';
+      enableNoBtnDodge();
     };
 
     function enableNoBtnDodge() {
       const noBtn = document.getElementById('no-btn');
       const moveSound = document.getElementById('move-sound');
       noBtn.onmouseover = function() {
-        // Phát âm thanh
         moveSound.currentTime = 0;
         moveSound.play();
 
@@ -70,11 +70,9 @@
         const yesBtn = document.getElementById('yes-btn');
         const yesRect = yesBtn.getBoundingClientRect();
 
-        // Tính toán vùng né để không đè lên nút "Có"
         let maxX = btnGroup.offsetWidth - btnWidth;
         let maxY = btnGroup.offsetHeight - btnHeight;
         let randomX, randomY, noRect;
-
         let tries = 0;
         do {
           randomX = Math.random() * maxX;
@@ -84,14 +82,10 @@
           noBtn.style.top = randomY + 'px';
           noRect = noBtn.getBoundingClientRect();
           tries++;
-          // Lặp lại nếu bị đè lên nút "Có"
-        } while (
-          isOverlap(noRect, yesRect) && tries < 20
-        );
+        } while (isOverlap(noRect, yesRect) && tries < 20);
       };
     }
 
-    // Hàm kiểm tra 2 hình chữ nhật có đè lên nhau không
     function isOverlap(rect1, rect2) {
       return !(
         rect1.right < rect2.left ||
@@ -117,17 +111,14 @@
         },
         body: "message=Có người vừa nhấn nút ahihi>< trên trang web!"
       }).then(response => {
-        // Ẩn popup kết quả
         document.getElementById('result-popup').style.display = 'none';
-        // Hiện lại giao diện câu hỏi
         document.querySelector('.question-page').style.display = 'flex';
-        // Reset input và trạng thái nếu cần
         document.getElementById('reason-input').value = "";
         document.getElementById('secret-msg').style.display = 'none';
-        // Đặt lại vị trí nút nếu cần
-        setInitialBtnPositions();
+        resetNoBtnPosition();
+        enableNoBtnDodge();
       });
     };
   </script>
 </body>
-</html> 
+</html>
