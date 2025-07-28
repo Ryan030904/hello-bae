@@ -26,6 +26,7 @@ body, html {
   z-index: 2;
   min-width: 320px;
   max-width: 350px;
+  word-break: break-word;
 }
 
 .cat-img, .dog-img {
@@ -45,6 +46,7 @@ body, html {
 .popup p {
   color: #e0e0e0;
   margin-bottom: 30px;
+  word-break: break-word;
 }
 
 #ok-btn {
@@ -96,6 +98,7 @@ body, html {
   text-align: center;
   text-shadow: 3px 3px 12px #000, 0 0 6px #000, 0 0 2px #000;
   font-weight: bold;
+  word-break: break-word;
 }
 
 .btn-group {
@@ -104,17 +107,11 @@ body, html {
   align-items: center;
   gap: 32px;
   margin-top: 24px;
-  position: static; /* Không bị lệch khi reset */
-  left: 0;
+  position: relative; /* ĐỂ NÚT 'KHÔNG' CÓ THỂ DI CHUYỂN BÊN TRONG */
 }
 
 .btn-group .btn {
   pointer-events: auto;
-}
-
-.no-btn, .yes-btn {
-  position: static; /* Đảm bảo không bị cố định vị trí */
-  z-index: 2;
 }
 
 .btn {
@@ -130,6 +127,7 @@ body, html {
 .no-btn {
   background: #1cb6d7;
   color: #fff;
+  position: absolute; /* CHO PHÉP DI CHUYỂN */
 }
 
 .no-btn:hover {
@@ -139,6 +137,7 @@ body, html {
 .yes-btn {
   background: #e74c3c;
   color: #fff;
+  position: relative;
 }
 
 .yes-btn:hover {
@@ -152,7 +151,6 @@ body, html {
   transform: translate(-50%, -50%);
   min-width: 320px;
   max-width: 95vw;
-  width: 100%;
   background: rgba(20, 30, 60, 0.95);
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.25);
@@ -183,6 +181,7 @@ body, html {
   box-sizing: border-box;
   resize: vertical;
   line-height: 1.5;
+  word-break: break-word;
 }
 
 .secret-msg {
@@ -213,8 +212,9 @@ body, html {
   padding: 30px 30px 24px 30px;
   text-align: center;
   z-index: 200;
-  min-width: 1000px;
-  width: 1000px;
+  width: 100%;
+  max-width: 700px;
+  min-width: 320px;
 }
 
 .result-popup h2 {
@@ -227,6 +227,7 @@ body, html {
   color: #e0e0e0;
   font-size: 1.3em;
   margin-bottom: 0;
+  word-break: break-word;
 }
 
 .share-btn {
@@ -251,7 +252,6 @@ body, html {
   background: #7ed6d0;
   color: #125e5e;
 }
-
 
 /* ======================= RESPONSIVE CHO MOBILE ======================= */
 @media (max-width: 768px) {
@@ -279,7 +279,7 @@ body, html {
       justify-content: center;
       align-items: center;
       gap: 20px;
-      position: static;
+      position: relative; /* để nút "Không" vẫn né được */
       margin: 20px auto 0;
   }
 
@@ -287,7 +287,6 @@ body, html {
       width: auto;
       padding: 12px 24px;
       font-size: 1.1em;
-      position: static;
   }
 
   input[type="text"], textarea {
