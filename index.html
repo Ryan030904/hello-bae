@@ -9,6 +9,25 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+  <style>
+    @media (max-width: 768px) {
+      .btn-group {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 48px !important;
+        margin-top: 20px;
+        width: 100% !important;
+      }
+
+      .btn, .yes-btn, .no-btn {
+        width: 140px !important;
+        height: 50px !important;
+        font-size: 1em !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="background"></div>
@@ -60,50 +79,39 @@
     function enableNoBtnDodge() {
       const noBtn = document.getElementById('no-btn');
       const moveSound = document.getElementById('move-sound');
-      document.addEventListener('mousemove', e => {
-        const questionPage = document.querySelector('.question-page');
-        if (!questionPage || questionPage.style.display !== 'flex') return;
+      noBtn.onmouseover = function() {
+        moveSound.currentTime = 0;
+        moveSound.play();
 
-        const noRect = noBtn.getBoundingClientRect();
-        const yesRect = document.getElementById('yes-btn').getBoundingClientRect();
-        const distance = Math.hypot(e.clientX - (noRect.left + noRect.width / 2), e.clientY - (noRect.top + noRect.height / 2));
+        const btnGroup = document.querySelector('.btn-group');
+        const btnWidth = noBtn.offsetWidth;
+        const btnHeight = noBtn.offsetHeight;
+        const yesBtn = document.getElementById('yes-btn');
+        const yesRect = yesBtn.getBoundingClientRect();
 
-        if (distance < 100) {
-          moveSound.currentTime = 0;
-          moveSound.play();
-
-          const btnGroup = document.querySelector('.btn-group');
-          const groupRect = btnGroup.getBoundingClientRect();
-          const maxX = btnGroup.offsetWidth - noRect.width;
-          const maxY = btnGroup.offsetHeight - noRect.height;
-
-          let newLeft, newTop, overlap, tries = 0;
-          do {
-            newLeft = Math.random() * maxX;
-            newTop = Math.random() * maxY;
-
-            const newRect = {
-              left: groupRect.left + newLeft,
-              right: groupRect.left + newLeft + noRect.width,
-              top: groupRect.top + newTop,
-              bottom: groupRect.top + newTop + noRect.height
-            };
-
-            overlap = !(
-              newRect.right < yesRect.left - 20 ||
-              newRect.left > yesRect.right + 20 ||
-              newRect.bottom < yesRect.top - 20 ||
-              newRect.top > yesRect.bottom + 20
-            );
-
-            tries++;
-          } while (overlap && tries < 100);
-
+        let maxX = btnGroup.offsetWidth - btnWidth;
+        let maxY = btnGroup.offsetHeight - btnHeight;
+        let randomX, randomY, noRect;
+        let tries = 0;
+        do {
+          randomX = Math.random() * maxX;
+          randomY = Math.random() * maxY;
           noBtn.style.position = 'absolute';
-          noBtn.style.left = `${newLeft}px`;
-          noBtn.style.top = `${newTop}px`;
-        }
-      });
+          noBtn.style.left = randomX + 'px';
+          noBtn.style.top = randomY + 'px';
+          noRect = noBtn.getBoundingClientRect();
+          tries++;
+        } while (isOverlap(noRect, yesRect) && tries < 20);
+      };
+    }
+
+    function isOverlap(rect1, rect2) {
+      return !(
+        rect1.right < rect2.left ||
+        rect1.left > rect2.right ||
+        rect1.bottom < rect2.top ||
+        rect1.top > rect2.bottom
+      );
     }
 
     function resetNoBtnPosition() {
@@ -121,7 +129,7 @@
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: "message=Có người vừa nhấn nút ahihi>< trên trang web!"
-      }).then(() => {
+      }).then(response => {
         document.getElementById('result-popup').style.display = 'none';
         document.querySelector('.question-page').style.display = 'flex';
         document.getElementById('reason-input').value = "";
