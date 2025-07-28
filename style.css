@@ -21,15 +21,14 @@ body, html {
   background: linear-gradient(135deg, #183153 80%, #274472 100%);
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-  padding: 30px 24px 24px 24px;
+  padding: 30px 24px;
   text-align: center;
   z-index: 2;
   min-width: 320px;
   max-width: 350px;
-  word-break: break-word;
 }
 
-.cat-img, .dog-img {
+.dog-img {
   width: 180px;
   height: 180px;
   object-fit: cover;
@@ -39,14 +38,13 @@ body, html {
 
 .popup h2 {
   color: #fff;
-  margin: 0 0 10px 0;
+  margin-bottom: 10px;
   font-size: 2em;
 }
 
 .popup p {
   color: #e0e0e0;
   margin-bottom: 30px;
-  word-break: break-word;
 }
 
 #ok-btn {
@@ -77,11 +75,11 @@ body, html {
 
 .big-title {
   font-size: 3em;
-  font-family: 'Pacifico', 'Segoe Script', cursive, sans-serif;
+  font-family: 'Pacifico', cursive;
   color: #fff;
   margin-bottom: 0.2em;
   text-align: center;
-  text-shadow: 4px 4px 16px #000, 0 0 8px #000, 0 0 2px #000;
+  text-shadow: 4px 4px 16px #000, 0 0 8px #000;
   font-weight: bold;
 }
 
@@ -92,42 +90,44 @@ body, html {
 
 .subtitle {
   font-size: 1.3em;
-  font-family: 'Segoe Script', cursive, sans-serif;
+  font-family: 'Segoe Script', cursive;
   color: #fff;
   margin-bottom: 2em;
   text-align: center;
-  text-shadow: 3px 3px 12px #000, 0 0 6px #000, 0 0 2px #000;
+  text-shadow: 3px 3px 12px #000, 0 0 6px #000;
   font-weight: bold;
-  word-break: break-word;
 }
 
+/* ======================= NÚT CÓ / KHÔNG ======================= */
 .btn-group {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   gap: 32px;
-  margin-top: 24px;
-  position: relative; /* ĐỂ NÚT 'KHÔNG' CÓ THỂ DI CHUYỂN BÊN TRONG */
-}
-
-.btn-group .btn {
-  pointer-events: auto;
+  height: 100px;
+  width: 100%;
 }
 
 .btn {
+  width: 160px;
+  height: 60px;
   font-size: 1.2em;
-  padding: 12px 32px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-family: inherit;
   transition: background 0.2s, color 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  position: relative;
 }
 
 .no-btn {
   background: #1cb6d7;
   color: #fff;
-  position: absolute; /* CHO PHÉP DI CHUYỂN */
 }
 
 .no-btn:hover {
@@ -137,34 +137,40 @@ body, html {
 .yes-btn {
   background: #e74c3c;
   color: #fff;
-  position: relative;
 }
 
 .yes-btn:hover {
   background: #b93222;
 }
 
-.reason-popup {
+/* ======================= LÝ DO & KẾT QUẢ ======================= */
+.reason-popup,
+.result-popup {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  min-width: 320px;
-  max-width: 95vw;
   background: rgba(20, 30, 60, 0.95);
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-  padding: 32px 24px 24px 24px;
+  padding: 32px 24px;
+  text-align: center;
   z-index: 1000;
+  max-width: 90vw;
+}
+
+.reason-popup {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   width: 600px;
-  max-width: 98vw;
 }
 
-.reason-popup h2 {
+.result-popup {
+  width: 700px;
+}
+
+.reason-popup h2,
+.result-popup h2 {
   color: #fff;
   font-size: 2.2em;
   margin-bottom: 20px;
@@ -179,73 +185,34 @@ body, html {
   border-radius: 8px;
   margin-bottom: 16px;
   box-sizing: border-box;
-  resize: vertical;
+  resize: none;
   line-height: 1.5;
-  word-break: break-word;
+}
+
+.secret-msg,
+.share-btn {
+  margin-top: 20px;
+  font-size: 1.1em;
+  border-radius: 8px;
+  padding: 12px 36px;
+  display: block;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .secret-msg {
-  margin-top: 18px;
   background: #ff9980;
   color: #fff;
-  font-size: 1.1em;
-  border-radius: 8px;
-  padding: 10px 36px;
-  display: block;
-  font-weight: bold;
-  transition: opacity 0.2s;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
-}
-
-.result-popup {
-  position: fixed;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(20, 30, 60, 0.95);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-  padding: 30px 30px 24px 30px;
-  text-align: center;
-  z-index: 200;
-  width: 100%;
-  max-width: 700px;
-  min-width: 320px;
-}
-
-.result-popup h2 {
-  color: #fff;
-  font-size: 2.2em;
-  margin-bottom: 10px;
-}
-
-.result-msg {
-  color: #e0e0e0;
-  font-size: 1.3em;
-  margin-bottom: 0;
-  word-break: break-word;
 }
 
 .share-btn {
-  margin-top: 28px;
   background: #9ee7e2;
   color: #18797c;
-  font-size: 1.3em;
-  border-radius: 10px;
-  padding: 16px 32px;
-  display: block;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: background 0.2s, color 0.2s;
 }
 
 .share-btn:hover {
@@ -253,56 +220,49 @@ body, html {
   color: #125e5e;
 }
 
-/* ======================= RESPONSIVE CHO MOBILE ======================= */
+.result-msg {
+  color: #e0e0e0;
+  font-size: 1.3em;
+  margin-bottom: 0;
+}
+
+/* ======================= MOBILE ======================= */
 @media (max-width: 768px) {
   .popup,
   .question-page,
   .reason-popup,
   .result-popup {
-      width: 95vw !important;
-      max-width: 95vw !important;
-      padding: 24px 8px !important;
-      font-size: 1.1em !important;
+    width: 95vw !important;
+    padding: 20px !important;
+    font-size: 1em !important;
   }
 
   .popup img.dog-img {
-      width: 80px !important;
-      height: 80px !important;
+    width: 100px !important;
+    height: 100px !important;
   }
 
-  .big-title, .popup h2, .reason-popup h2, .result-popup h2 {
-      font-size: 1.3em !important;
+  .big-title,
+  .popup h2,
+  .reason-popup h2,
+  .result-popup h2 {
+    font-size: 1.5em !important;
   }
 
   .btn-group {
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      position: relative; /* để nút "Không" vẫn né được */
-      margin: 20px auto 0;
+    flex-direction: column;
+    height: 130px;
+    gap: 16px;
   }
 
   .btn, .yes-btn, .no-btn {
-      width: auto;
-      padding: 12px 24px;
-      font-size: 1.1em;
-  }
-
-  input[type="text"], textarea {
-      font-size: 1.1em;
-      padding: 10px;
-      width: 90vw;
-      max-width: 95vw;
-  }
-
-  .reason-popup {
-      width: 95vw;
-      padding: 18px 6vw 18px 6vw;
+    width: 80%;
+    height: 50px;
+    font-size: 1.05em;
   }
 
   #reason-input {
-      width: 100%;
-      max-width: 100%;
+    width: 100%;
+    font-size: 1em;
   }
 }
