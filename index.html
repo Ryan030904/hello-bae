@@ -13,21 +13,18 @@
     @media (max-width: 768px) {
       .btn-group {
         flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        justify-content: space-between !important;
+        flex-wrap: wrap;
+        justify-content: center;
         align-items: center;
-        gap: 24px !important;
-        width: 90% !important;
-        margin: 0 auto;
+        gap: 48px !important;
         margin-top: 20px;
-        position: relative;
+        width: 100% !important;
       }
 
       .btn, .yes-btn, .no-btn {
-        width: 130px !important;
+        width: 140px !important;
         height: 50px !important;
         font-size: 1em !important;
-        position: relative !important;
       }
     }
   </style>
@@ -83,8 +80,6 @@
       const noBtn = document.getElementById('no-btn');
       const moveSound = document.getElementById('move-sound');
       noBtn.onmouseover = function() {
-        if (window.innerWidth < 768) return; // Không né chuột trên mobile dọc
-
         moveSound.currentTime = 0;
         moveSound.play();
 
