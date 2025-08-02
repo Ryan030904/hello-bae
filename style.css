@@ -376,6 +376,9 @@ body, html {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
+    /* Thêm để tránh bị ẩn */
+    min-width: 120px !important;
+    min-height: 45px !important;
   }
   
   /* Khi nút được di chuyển */
@@ -385,12 +388,28 @@ body, html {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
+    /* Thêm để tránh bị ẩn */
+    min-width: 120px !important;
+    min-height: 45px !important;
   }
   
   /* Đảm bảo container không bị ẩn */
   .btn-group {
     display: flex !important;
     visibility: visible !important;
+  }
+  
+  /* Backup cho trường hợp nút bị ẩn */
+  .no-btn:not([style*="display: none"]) {
+    display: flex !important;
+  }
+  
+  /* Đảm bảo nút luôn có kích thước */
+  .no-btn {
+    width: auto !important;
+    height: auto !important;
+    min-width: 120px !important;
+    min-height: 45px !important;
   }
 }
 
