@@ -76,6 +76,7 @@
       enableNoBtnDodge();
     };
 
+
     function enableNoBtnDodge() {
       const noBtn = document.getElementById('no-btn');
       const moveSound = document.getElementById('move-sound');
@@ -88,20 +89,44 @@
         const btnHeight = noBtn.offsetHeight;
         const yesBtn = document.getElementById('yes-btn');
         const yesRect = yesBtn.getBoundingClientRect();
+        const groupRect = btnGroup.getBoundingClientRect();
 
-        let maxX = btnGroup.offsetWidth - btnWidth;
-        let maxY = btnGroup.offsetHeight - btnHeight;
+        // Tính toán phạm vi di chuyển trong group, không bị tràn ra ngoài group
+        let maxX = btnGroup.clientWidth - btnWidth;
+        let maxY = btnGroup.clientHeight - btnHeight;
+
+        // Nếu group quá nhỏ, lấy theo window
+        if (maxX < 10 || maxY < 10) {
+          maxX = window.innerWidth - btnWidth - 10;
+          maxY = window.innerHeight - btnHeight - 10;
+        }
+
         let randomX, randomY, noRect;
         let tries = 0;
         do {
           randomX = Math.random() * maxX;
           randomY = Math.random() * maxY;
           noBtn.style.position = 'absolute';
+          // Đặt vị trí tuyệt đối so với group
           noBtn.style.left = randomX + 'px';
           noBtn.style.top = randomY + 'px';
           noRect = noBtn.getBoundingClientRect();
+          // Đảm bảo không đè lên nút Có và không tràn ra ngoài group/window
+          const notOverlap = !isOverlap(noRect, yesRect);
+          const inGroup = (
+            noRect.left >= groupRect.left &&
+            noRect.top >= groupRect.top &&
+            noRect.right <= groupRect.right &&
+            noRect.bottom <= groupRect.bottom
+          );
+          const inWindow = (
+            noRect.left >= 0 &&
+            noRect.top >= 0 &&
+            noRect.right <= window.innerWidth &&
+            noRect.bottom <= window.innerHeight
+          );
           tries++;
-        } while (isOverlap(noRect, yesRect) && tries < 20);
+        } while ((isOverlap(noRect, yesRect) || (!inGroup && !inWindow)) && tries < 30);
       };
     }
 
