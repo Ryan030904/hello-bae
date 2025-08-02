@@ -38,52 +38,67 @@ function moveButton(e) {
         
         let newLeft, newTop, overlap, mouseOverlap;
         let tries = 0;
-        const maxTries = 200; // Tăng số lần thử
+        const maxTries = 100; // Giảm số lần thử để tránh lag
         
         // Tính toán vùng an toàn để nút không bị khuất
-        const safeMargin = 20;
+        const safeMargin = 30; // Tăng margin an toàn
         const maxLeft = window.innerWidth - noRect.width - safeMargin;
         const maxTop = window.innerHeight - noRect.height - safeMargin;
         const minLeft = safeMargin;
         const minTop = safeMargin;
         
-        do {
-            newLeft = Math.random() * (maxLeft - minLeft) + minLeft;
-            newTop = Math.random() * (maxTop - minTop) + minTop;
+        // Đảm bảo vùng di chuyển hợp lệ
+        if (maxLeft <= minLeft || maxTop <= minTop) {
+            // Nếu màn hình quá nhỏ, sử dụng logic khác
+            newLeft = Math.max(10, Math.min(window.innerWidth - noRect.width - 10, noRect.left));
+            newTop = Math.max(10, Math.min(window.innerHeight - noRect.height - 10, noRect.top));
+        } else {
+            do {
+                newLeft = Math.random() * (maxLeft - minLeft) + minLeft;
+                newTop = Math.random() * (maxTop - minTop) + minTop;
 
-            const fakeNoRect = {
-                left: newLeft,
-                right: newLeft + noRect.width,
-                top: newTop,
-                bottom: newTop + noRect.height
-            };
+                const fakeNoRect = {
+                    left: newLeft,
+                    right: newLeft + noRect.width,
+                    top: newTop,
+                    bottom: newTop + noRect.height
+                };
 
-            // Kiểm tra không chồng lên nút "Có"
-            overlap = !(
-                fakeNoRect.right < yesRect.left ||
-                fakeNoRect.left > yesRect.right ||
-                fakeNoRect.bottom < yesRect.top ||
-                fakeNoRect.top > yesRect.bottom
-            );
+                // Kiểm tra không chồng lên nút "Có"
+                overlap = !(
+                    fakeNoRect.right < yesRect.left ||
+                    fakeNoRect.left > yesRect.right ||
+                    fakeNoRect.bottom < yesRect.top ||
+                    fakeNoRect.top > yesRect.bottom
+                );
 
-            // Kiểm tra không chồng lên vị trí chuột/touch
-            mouseOverlap = (
-                mouseX >= fakeNoRect.left &&
-                mouseX <= fakeNoRect.right &&
-                mouseY >= fakeNoRect.top &&
-                mouseY <= fakeNoRect.bottom
-            );
+                // Kiểm tra không chồng lên vị trí chuột/touch
+                mouseOverlap = (
+                    mouseX >= fakeNoRect.left &&
+                    mouseX <= fakeNoRect.right &&
+                    mouseY >= fakeNoRect.top &&
+                    mouseY <= fakeNoRect.bottom
+                );
 
-            tries++;
-        } while ((overlap || mouseOverlap) && tries < maxTries);
+                tries++;
+            } while ((overlap || mouseOverlap) && tries < maxTries);
+        }
 
         // Đảm bảo nút không ra ngoài màn hình
         newLeft = Math.max(minLeft, Math.min(maxLeft, newLeft));
         newTop = Math.max(minTop, Math.min(maxTop, newTop));
 
-        noBtn.style.position = "fixed";
-        noBtn.style.left = `${newLeft}px`;
-        noBtn.style.top = `${newTop}px`;
+        // Kiểm tra xem nút có hiển thị không trước khi di chuyển
+        if (noBtn.offsetParent !== null) {
+            noBtn.style.position = "fixed";
+            noBtn.style.left = `${newLeft}px`;
+            noBtn.style.top = `${newTop}px`;
+            
+            // Đảm bảo nút vẫn hiển thị sau khi di chuyển
+            noBtn.style.display = 'flex';
+            noBtn.style.visibility = 'visible';
+            noBtn.style.opacity = '1';
+        }
     }
 }
 
@@ -102,7 +117,8 @@ document.addEventListener('touchstart', function(e) {
 
 // Thêm xử lý cho touch end để tránh lag
 document.addEventListener('touchend', function(e) {
-    // Reset một số trạng thái nếu cần
+    // Đảm bảo nút vẫn hiển thị sau khi touch
+    ensureNoBtnVisible();
 });
 
 // Cải thiện performance cho mobile
@@ -114,6 +130,11 @@ document.addEventListener('touchmove', function(e) {
     }, 16); // ~60fps
 }, { passive: false });
 
+// Thêm xử lý đặc biệt cho màn hình dọc
+function isPortrait() {
+    return window.innerHeight > window.innerWidth;
+}
+
 // Xử lý khi xoay màn hình
 window.addEventListener('orientationchange', function() {
     // Đợi một chút để màn hình xoay xong
@@ -122,7 +143,7 @@ window.addEventListener('orientationchange', function() {
         if (noBtn.style.position === 'fixed') {
             // Kiểm tra lại vị trí nút sau khi xoay
             const noRect = noBtn.getBoundingClientRect();
-            const safeMargin = 20;
+            const safeMargin = 30;
             const maxLeft = window.innerWidth - noRect.width - safeMargin;
             const maxTop = window.innerHeight - noRect.height - safeMargin;
             const minLeft = safeMargin;
@@ -137,6 +158,9 @@ window.addEventListener('orientationchange', function() {
             
             noBtn.style.left = `${currentLeft}px`;
             noBtn.style.top = `${currentTop}px`;
+            
+            // Đảm bảo nút hiển thị
+            ensureNoBtnVisible();
         }
     }, 100);
 });
@@ -173,7 +197,53 @@ window.addEventListener('load', function() {
         viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=no';
         document.head.appendChild(viewport);
     }
+    
+    // Đảm bảo nút "Không" luôn hiển thị
+    ensureNoBtnVisible();
 });
+
+// Hàm đảm bảo nút "Không" luôn hiển thị
+function ensureNoBtnVisible() {
+    const noBtn = document.getElementById('no-btn');
+    if (noBtn) {
+        noBtn.style.display = 'flex';
+        noBtn.style.visibility = 'visible';
+        noBtn.style.opacity = '1';
+        noBtn.style.zIndex = '1000';
+    }
+}
+
+// Thêm xử lý để kiểm tra và khôi phục nút nếu bị ẩn
+setInterval(() => {
+    const noBtn = document.getElementById('no-btn');
+    const questionPage = document.querySelector('.question-page');
+    
+    if (questionPage && questionPage.style.display === 'flex' && noBtn) {
+        const rect = noBtn.getBoundingClientRect();
+        const isVisible = rect.width > 0 && rect.height > 0 && 
+                         rect.top >= 0 && rect.left >= 0 &&
+                         rect.bottom <= window.innerHeight && 
+                         rect.right <= window.innerWidth;
+        
+        if (!isVisible && noBtn.style.position === 'fixed') {
+            // Nếu nút bị ẩn, đặt lại vị trí an toàn
+            const safeMargin = 30;
+            const maxLeft = window.innerWidth - rect.width - safeMargin;
+            const maxTop = window.innerHeight - rect.height - safeMargin;
+            const minLeft = safeMargin;
+            const minTop = safeMargin;
+            
+            const newLeft = Math.max(minLeft, Math.min(maxLeft, Math.random() * maxLeft));
+            const newTop = Math.max(minTop, Math.min(maxTop, Math.random() * maxTop));
+            
+            noBtn.style.left = `${newLeft}px`;
+            noBtn.style.top = `${newTop}px`;
+            noBtn.style.display = 'flex';
+            noBtn.style.visibility = 'visible';
+            noBtn.style.opacity = '1';
+        }
+    }
+}, 1000); // Kiểm tra mỗi giây
 
 document.getElementById('yes-btn').onclick = function () {
     document.getElementById('reason-popup').style.display = 'block';

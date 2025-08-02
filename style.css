@@ -261,6 +261,9 @@ body, html {
     height: 130px;
     gap: 16px;
     margin-top: 20px;
+    /* Đảm bảo container luôn hiển thị */
+    position: relative;
+    z-index: 10;
   }
 
   .btn, .yes-btn, .no-btn {
@@ -268,6 +271,9 @@ body, html {
     height: 50px;
     font-size: 1.05em;
     min-width: 120px;
+    /* Đảm bảo nút luôn hiển thị */
+    position: relative;
+    z-index: 1000;
   }
 
   #reason-input {
@@ -278,6 +284,10 @@ body, html {
   /* Đảm bảo nút không bị khuất khi di chuyển */
   .no-btn {
     z-index: 1000 !important;
+    /* Đảm bảo nút luôn hiển thị */
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
   
   /* Tối ưu cho màn hình nhỏ */
@@ -362,11 +372,25 @@ body, html {
   .no-btn {
     position: relative !important;
     z-index: 1000 !important;
+    /* Đảm bảo nút luôn hiển thị */
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
   
   /* Khi nút được di chuyển */
   .no-btn[style*="position: fixed"] {
     z-index: 1001 !important;
+    /* Đảm bảo nút vẫn hiển thị */
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Đảm bảo container không bị ẩn */
+  .btn-group {
+    display: flex !important;
+    visibility: visible !important;
   }
 }
 
