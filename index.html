@@ -70,75 +70,7 @@
   </form>
   <script src="script.js"></script>
   <script>
-    document.getElementById('ok-btn').onclick = function() {
-      document.querySelector('.popup').style.display = 'none';
-      document.querySelector('.question-page').style.display = 'flex';
-      enableNoBtnDodge();
-    };
-
-
-    function enableNoBtnDodge() {
-      const noBtn = document.getElementById('no-btn');
-      const moveSound = document.getElementById('move-sound');
-      noBtn.onmouseover = function() {
-        moveSound.currentTime = 0;
-        moveSound.play();
-
-        const btnGroup = document.querySelector('.btn-group');
-        const btnWidth = noBtn.offsetWidth;
-        const btnHeight = noBtn.offsetHeight;
-        const yesBtn = document.getElementById('yes-btn');
-        const yesRect = yesBtn.getBoundingClientRect();
-        const groupRect = btnGroup.getBoundingClientRect();
-
-        // Tính toán phạm vi di chuyển trong group, không bị tràn ra ngoài group
-        let maxX = btnGroup.clientWidth - btnWidth;
-        let maxY = btnGroup.clientHeight - btnHeight;
-
-        // Nếu group quá nhỏ, lấy theo window
-        if (maxX < 10 || maxY < 10) {
-          maxX = window.innerWidth - btnWidth - 10;
-          maxY = window.innerHeight - btnHeight - 10;
-        }
-
-        let randomX, randomY, noRect;
-        let tries = 0;
-        do {
-          randomX = Math.random() * maxX;
-          randomY = Math.random() * maxY;
-          noBtn.style.position = 'absolute';
-          // Đặt vị trí tuyệt đối so với group
-          noBtn.style.left = randomX + 'px';
-          noBtn.style.top = randomY + 'px';
-          noRect = noBtn.getBoundingClientRect();
-          // Đảm bảo không đè lên nút Có và không tràn ra ngoài group/window
-          const notOverlap = !isOverlap(noRect, yesRect);
-          const inGroup = (
-            noRect.left >= groupRect.left &&
-            noRect.top >= groupRect.top &&
-            noRect.right <= groupRect.right &&
-            noRect.bottom <= groupRect.bottom
-          );
-          const inWindow = (
-            noRect.left >= 0 &&
-            noRect.top >= 0 &&
-            noRect.right <= window.innerWidth &&
-            noRect.bottom <= window.innerHeight
-          );
-          tries++;
-        } while ((isOverlap(noRect, yesRect) || (!inGroup && !inWindow)) && tries < 30);
-      };
-    }
-
-    function isOverlap(rect1, rect2) {
-      return !(
-        rect1.right < rect2.left ||
-        rect1.left > rect2.right ||
-        rect1.bottom < rect2.top ||
-        rect1.top > rect2.bottom
-      );
-    }
-
+    // Chỉ giữ lại phần xử lý form và reset
     function resetNoBtnPosition() {
       const noBtn = document.getElementById('no-btn');
       noBtn.style.position = 'static';
@@ -160,7 +92,6 @@
         document.getElementById('reason-input').value = "";
         document.getElementById('secret-msg').style.display = 'none';
         resetNoBtnPosition();
-        enableNoBtnDodge();
       });
     };
   </script>

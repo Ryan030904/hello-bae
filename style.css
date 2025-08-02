@@ -123,6 +123,13 @@ body, html {
   align-items: center;
   z-index: 2;
   position: relative;
+  /* Thêm để tránh text selection trên mobile */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Thêm để tránh highlight khi touch */
+  -webkit-tap-highlight-color: transparent;
 }
 
 .no-btn {
@@ -253,16 +260,119 @@ body, html {
     flex-direction: column;
     height: 130px;
     gap: 16px;
+    margin-top: 20px;
   }
 
   .btn, .yes-btn, .no-btn {
     width: 80%;
     height: 50px;
     font-size: 1.05em;
+    min-width: 120px;
   }
 
   #reason-input {
     width: 100%;
     font-size: 1em;
   }
+  
+  /* Đảm bảo nút không bị khuất khi di chuyển */
+  .no-btn {
+    z-index: 1000 !important;
+  }
+  
+  /* Tối ưu cho màn hình nhỏ */
+  .question-page {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .big-title {
+    font-size: 2em !important;
+    margin-bottom: 0.1em;
+  }
+  
+  .subtitle {
+    font-size: 1.1em !important;
+    margin-bottom: 1.5em;
+  }
+}
+
+/* Tối ưu cho màn hình rất nhỏ */
+@media (max-width: 480px) {
+  .popup,
+  .question-page,
+  .reason-popup,
+  .result-popup {
+    width: 98vw !important;
+    padding: 15px !important;
+  }
+  
+  .btn-group {
+    height: 120px;
+    gap: 12px;
+  }
+  
+  .btn, .yes-btn, .no-btn {
+    width: 85%;
+    height: 45px;
+    font-size: 1em;
+  }
+  
+  .big-title {
+    font-size: 1.8em !important;
+  }
+  
+  .subtitle {
+    font-size: 1em !important;
+  }
+}
+
+/* Tối ưu cho màn hình ngang (landscape) */
+@media (max-width: 768px) and (orientation: landscape) {
+  .question-page {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .big-title {
+    font-size: 1.8em !important;
+    margin-bottom: 0.1em;
+  }
+  
+  .subtitle {
+    font-size: 1em !important;
+    margin-bottom: 1em;
+  }
+  
+  .btn-group {
+    height: 100px;
+    gap: 20px;
+    margin-top: 10px;
+  }
+  
+  .btn, .yes-btn, .no-btn {
+    width: 120px;
+    height: 45px;
+    font-size: 1em;
+  }
+}
+
+/* Đảm bảo nút luôn hiển thị trên mobile */
+@media (max-width: 768px) {
+  .no-btn {
+    position: relative !important;
+    z-index: 1000 !important;
+  }
+  
+  /* Khi nút được di chuyển */
+  .no-btn[style*="position: fixed"] {
+    z-index: 1001 !important;
+  }
+}
+
+/* Đảm bảo nút không bị khuất khi di chuyển */
+.no-btn[style*="position: fixed"] {
+  z-index: 1001 !important;
+  /* Thêm shadow để dễ nhìn hơn */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
