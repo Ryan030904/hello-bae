@@ -370,99 +370,15 @@ document.getElementById('ok-btn').addEventListener('click', function () {
     bgMusic.play();
 });
 
-// Hàm tạo hiệu ứng bong bóng
-function createBubble(x, y, index) {
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble';
-  
-  // Kích thước ngẫu nhiên cho bong bóng
-  const size = Math.random() * 50 + 20; // 20-70px
-  bubble.style.width = size + 'px';
-  bubble.style.height = size + 'px';
-  bubble.style.left = (x - size/2) + 'px';
-  bubble.style.top = (y - size/2) + 'px';
-  
-  // Thêm màu sắc ngẫu nhiên cho bong bóng
-  const colors = [
-    'rgba(255, 255, 255, 0.9)',
-    'rgba(255, 255, 255, 0.7)',
-    'rgba(255, 255, 255, 0.8)',
-    'rgba(255, 255, 255, 0.6)',
-    'rgba(255, 255, 255, 0.85)'
-  ];
-  const randomColor = colors[Math.floor(Math.random() * colors.length)];
-  bubble.style.background = `radial-gradient(circle at 30% 30%, ${randomColor}, rgba(255, 255, 255, 0.3))`;
-  
-  // Thêm animation khác nhau dựa trên index
-  if (index % 3 === 0) {
-    bubble.style.animation = 'bubbleFloatLeft 3s ease-out forwards';
-  } else if (index % 3 === 1) {
-    bubble.style.animation = 'bubbleFloatRight 3s ease-out forwards';
-  } else {
-    bubble.style.animation = 'bubbleFloat 3s ease-out forwards';
-  }
-  
-  document.body.appendChild(bubble);
-  
-  // Xóa bong bóng sau khi animation kết thúc
-  setTimeout(() => {
-    if (bubble.parentNode) {
-      bubble.parentNode.removeChild(bubble);
-    }
-  }, 3000);
-}
-
-// Hàm tạo hiệu ứng ripple
-function createRipple(x, y) {
-  const ripple = document.createElement('div');
-  ripple.className = 'ripple';
-  ripple.style.width = '20px';
-  ripple.style.height = '20px';
-  ripple.style.left = (x - 10) + 'px';
-  ripple.style.top = (y - 10) + 'px';
-  
-  document.body.appendChild(ripple);
-  
-  // Xóa ripple sau khi animation kết thúc
-  setTimeout(() => {
-    if (ripple.parentNode) {
-      ripple.parentNode.removeChild(ripple);
-    }
-  }, 600);
-}
-
-// Hàm tạo nhiều bong bóng
-function createBubbleBurst(x, y) {
-  // Tạo ripple effect tại điểm click
-  createRipple(x, y);
-  
-  // Tạo nhiều bong bóng toàn màn hình
-  const bubbleCount = Math.floor(Math.random() * 20) + 15; // 15-35 bong bóng
-  
-  for (let i = 0; i < bubbleCount; i++) {
-    setTimeout(() => {
-      // Vị trí ngẫu nhiên toàn màn hình
-      const randomX = Math.random() * window.innerWidth;
-      const randomY = Math.random() * window.innerHeight;
-      createBubble(randomX, randomY, i);
-    }, i * 80); // Delay ngẫu nhiên để tạo hiệu ứng tự nhiên
-  }
-}
-
 // Thêm xử lý sự kiện cho nút "Đừng nói ai biết nha!"
 document.addEventListener('DOMContentLoaded', function() {
   const secretMsgBtn = document.getElementById('secret-msg');
   
   if (secretMsgBtn) {
     secretMsgBtn.addEventListener('click', function(e) {
-      // Tạo hiệu ứng bong bóng tại vị trí click
-      createBubbleBurst(e.clientX, e.clientY);
-      
-      // Chờ một chút rồi chuyển sang popup kết quả
-      setTimeout(() => {
-        document.getElementById('reason-popup').style.display = 'none';
-        document.getElementById('result-popup').style.display = 'block';
-      }, 500);
+      // Chuyển sang popup kết quả ngay lập tức
+      document.getElementById('reason-popup').style.display = 'none';
+      document.getElementById('result-popup').style.display = 'block';
     });
   }
 });

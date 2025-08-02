@@ -81,16 +81,9 @@
 
     // Cập nhật xử lý sự kiện cho nút "Đừng nói ai biết nha!"
     document.getElementById('secret-msg').onclick = function(e) {
-      // Tạo hiệu ứng bong bóng
-      if (typeof createBubbleBurst === 'function') {
-        createBubbleBurst(e.clientX, e.clientY);
-      }
-      
-      // Chờ một chút rồi chuyển sang popup kết quả
-      setTimeout(() => {
-        document.getElementById('reason-popup').style.display = 'none';
-        document.getElementById('result-popup').style.display = 'block';
-      }, 500);
+      // Chuyển sang popup kết quả ngay lập tức
+      document.getElementById('reason-popup').style.display = 'none';
+      document.getElementById('result-popup').style.display = 'block';
     };
 
     document.getElementById('ahihi-btn').onclick = function() {
