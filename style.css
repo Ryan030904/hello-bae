@@ -561,6 +561,13 @@ body, html {
     width: 95vw !important;
     padding: 20px !important;
     font-size: 1em !important;
+    /* Đảm bảo popup không di chuyển */
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
   }
 
   .popup img.dog-img {
@@ -594,14 +601,13 @@ body, html {
     /* Đảm bảo nút luôn hiển thị */
     position: relative;
     z-index: 1000;
-    /* Đảm bảo cả hai nút có kích thước bằng nhau */
-    box-sizing: border-box;
-    flex-shrink: 0;
     /* Đảm bảo kích thước cố định */
     width: 140px !important;
     height: 50px !important;
     min-width: 140px !important;
     max-width: 140px !important;
+    box-sizing: border-box;
+    flex-shrink: 0;
   }
 
   #reason-input {
@@ -633,6 +639,22 @@ body, html {
     font-size: 1.1em !important;
     margin-bottom: 1.5em;
   }
+  
+  /* Sửa icon để hiển thị rõ */
+  .emoji {
+    font-size: 1.2em !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    filter: contrast(1.5) brightness(1.2) !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+  }
+  
+  /* Đảm bảo icon trong khung hiển thị rõ */
+  .shake-text .emoji {
+    font-size: 1.3em !important;
+    filter: contrast(1.8) brightness(1.3) drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.9)) !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1) !important;
+  }
 }
 
 /* Tối ưu cho màn hình rất nhỏ */
@@ -643,6 +665,13 @@ body, html {
   .result-popup {
     width: 98vw !important;
     padding: 15px !important;
+    /* Đảm bảo popup không di chuyển */
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-height: 95vh !important;
+    overflow-y: auto !important;
   }
   
   .btn-group {
@@ -669,6 +698,20 @@ body, html {
   
   .subtitle {
     font-size: 1em !important;
+  }
+  
+  /* Sửa icon cho màn hình nhỏ */
+  .emoji {
+    font-size: 1.1em !important;
+    filter: contrast(1.8) brightness(1.4) !important;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 1) !important;
+  }
+  
+  /* Đảm bảo icon trong khung hiển thị rõ trên màn hình nhỏ */
+  .shake-text .emoji {
+    font-size: 1.2em !important;
+    filter: contrast(2.0) brightness(1.5) drop-shadow(3px 3px 6px rgba(0, 0, 0, 1)) !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1), 0 0 8px rgba(255, 255, 255, 0.3) !important;
   }
 }
 
@@ -697,33 +740,41 @@ body, html {
   }
   
   .btn, .yes-btn, .no-btn {
-    width: 140px !important;
-    height: 50px !important;
+    width: 120px !important;
+    height: 45px !important;
     font-size: 1em !important;
-    min-width: 140px !important;
-    max-width: 140px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
     flex-shrink: 0 !important;
-    /* Đảm bảo cả hai nút có kích thước bằng nhau */
     box-sizing: border-box !important;
     padding: 0 !important;
     margin: 0 !important;
   }
   
-  /* Đảm bảo nút "Không" có kích thước bằng nút "Có" */
-  .no-btn {
-    width: 140px !important;
-    height: 50px !important;
-    min-width: 140px !important;
-    max-width: 140px !important;
-    flex-shrink: 0 !important;
+  /* Đảm bảo popup không di chuyển trên landscape */
+  .popup,
+  .question-page,
+  .reason-popup,
+  .result-popup {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
   }
   
-  .yes-btn {
-    width: 140px !important;
-    height: 50px !important;
-    min-width: 140px !important;
-    max-width: 140px !important;
-    flex-shrink: 0 !important;
+  /* Sửa icon cho landscape */
+  .emoji {
+    font-size: 1.1em !important;
+    filter: contrast(1.6) brightness(1.3) !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9) !important;
+  }
+  
+  .shake-text .emoji {
+    font-size: 1.2em !important;
+    filter: contrast(1.8) brightness(1.4) drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.9)) !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1) !important;
   }
 }
 
