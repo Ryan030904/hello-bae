@@ -130,11 +130,22 @@ body, html {
   user-select: none;
   /* Thêm để tránh highlight khi touch */
   -webkit-tap-highlight-color: transparent;
+  /* Đảm bảo cả hai nút có kích thước bằng nhau */
+  box-sizing: border-box;
+  flex-shrink: 0;
+  min-width: 160px;
+  max-width: 160px;
 }
 
 .no-btn {
   background: #1cb6d7;
   color: #fff;
+  /* Đảm bảo nút "Không" có kích thước bằng nút "Có" */
+  width: 160px !important;
+  height: 60px !important;
+  min-width: 160px !important;
+  max-width: 160px !important;
+  flex-shrink: 0 !important;
 }
 
 .no-btn:hover {
@@ -144,6 +155,12 @@ body, html {
 .yes-btn {
   background: #e74c3c;
   color: #fff;
+  /* Đảm bảo nút "Có" có kích thước bằng nút "Không" */
+  width: 160px !important;
+  height: 60px !important;
+  min-width: 160px !important;
+  max-width: 160px !important;
+  flex-shrink: 0 !important;
 }
 
 .yes-btn:hover {
@@ -278,6 +295,11 @@ body, html {
     /* Đảm bảo cả hai nút có kích thước bằng nhau */
     box-sizing: border-box;
     flex-shrink: 0;
+    /* Đảm bảo kích thước cố định */
+    width: 140px !important;
+    height: 50px !important;
+    min-width: 140px !important;
+    max-width: 140px !important;
   }
 
   #reason-input {
@@ -330,6 +352,13 @@ body, html {
     width: 85%;
     height: 45px;
     font-size: 1em;
+    /* Đảm bảo kích thước cố định */
+    width: 120px !important;
+    height: 45px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
+    box-sizing: border-box;
+    flex-shrink: 0;
   }
   
   .big-title {
@@ -464,4 +493,52 @@ body, html {
   max-width: 140px !important;
   flex-shrink: 0 !important;
   box-sizing: border-box !important;
+}
+
+/* Đảm bảo nút "Không" luôn có kích thước đúng trên mọi thiết bị */
+.no-btn {
+  width: 160px !important;
+  height: 60px !important;
+  min-width: 160px !important;
+  max-width: 160px !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Đảm bảo nút "Có" luôn có kích thước đúng trên mọi thiết bị */
+.yes-btn {
+  width: 160px !important;
+  height: 60px !important;
+  min-width: 160px !important;
+  max-width: 160px !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* CSS cuối cùng để đảm bảo nút có kích thước bằng nhau trên mọi thiết bị */
+.btn-group .btn,
+.btn-group .yes-btn,
+.btn-group .no-btn {
+  width: 160px !important;
+  height: 60px !important;
+  min-width: 160px !important;
+  max-width: 160px !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Đảm bảo nút "Không" không bị ảnh hưởng khi di chuyển */
+.no-btn[style*="position: fixed"] {
+  width: 160px !important;
+  height: 60px !important;
+  min-width: 160px !important;
+  max-width: 160px !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
