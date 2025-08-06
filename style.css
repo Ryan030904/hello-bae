@@ -326,6 +326,25 @@ body, html {
     font-size: 1em;
   }
   
+  /* Đảm bảo nút "Không" có thể di chuyển */
+  .no-btn {
+    position: relative !important;
+    z-index: 1000 !important;
+    /* Đảm bảo nút luôn hiển thị */
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Khi nút được di chuyển */
+  .no-btn[style*="position: fixed"] {
+    z-index: 1001 !important;
+    /* Đảm bảo nút vẫn hiển thị */
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
   /* Tối ưu cho màn hình nhỏ */
   .question-page {
     padding-top: 20px;
@@ -450,33 +469,57 @@ body, html {
   }
   
   .btn, .yes-btn, .no-btn {
-    width: 140px !important;
-    height: 50px !important;
+    width: 120px !important;
+    height: 45px !important;
     font-size: 1em !important;
-    min-width: 140px !important;
-    max-width: 140px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
     flex-shrink: 0 !important;
-    /* Đảm bảo cả hai nút có kích thước bằng nhau */
     box-sizing: border-box !important;
     padding: 0 !important;
     margin: 0 !important;
   }
   
-  /* Đảm bảo nút "Không" có kích thước bằng nút "Có" */
-  .no-btn {
-    width: 140px !important;
-    height: 50px !important;
-    min-width: 140px !important;
-    max-width: 140px !important;
-    flex-shrink: 0 !important;
+  /* Đảm bảo popup không di chuyển trên landscape */
+  .popup,
+  .question-page,
+  .reason-popup,
+  .result-popup {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
   }
   
-  .yes-btn {
-    width: 140px !important;
-    height: 50px !important;
-    min-width: 140px !important;
-    max-width: 140px !important;
-    flex-shrink: 0 !important;
+  /* Đảm bảo nút "Không" có thể di chuyển trên landscape */
+  .no-btn {
+    position: relative !important;
+    z-index: 1000 !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .no-btn[style*="position: fixed"] {
+    z-index: 1001 !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Sửa icon cho landscape */
+  .emoji {
+    font-size: 1.1em !important;
+    filter: contrast(1.6) brightness(1.3) !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9) !important;
+  }
+  
+  .shake-text .emoji {
+    font-size: 1.2em !important;
+    filter: contrast(1.8) brightness(1.4) drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.9)) !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1) !important;
   }
 }
 

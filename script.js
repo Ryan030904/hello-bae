@@ -55,20 +55,20 @@ function moveButton(e) {
                 attempts++;
                 
                 // Kiểm tra không chồng lên nút "Có"
-            const fakeNoRect = {
-                left: newLeft,
-                right: newLeft + noRect.width,
-                top: newTop,
-                bottom: newTop + noRect.height
-            };
-
+                const fakeNoRect = {
+                    left: newLeft,
+                    right: newLeft + noRect.width,
+                    top: newTop,
+                    bottom: newTop + noRect.height
+                };
+                
                 const overlap = !(
-                fakeNoRect.right < yesRect.left ||
-                fakeNoRect.left > yesRect.right ||
-                fakeNoRect.bottom < yesRect.top ||
-                fakeNoRect.top > yesRect.bottom
-            );
-
+                    fakeNoRect.right < yesRect.left ||
+                    fakeNoRect.left > yesRect.right ||
+                    fakeNoRect.bottom < yesRect.top ||
+                    fakeNoRect.top > yesRect.bottom
+                );
+                
                 if (!overlap) break;
                 
             } while (attempts < maxAttempts);
@@ -78,9 +78,9 @@ function moveButton(e) {
             newTop = Math.max(minTop, Math.min(maxTop, newTop));
             
             // Di chuyển nút và đảm bảo hiển thị
-        noBtn.style.position = "fixed";
-        noBtn.style.left = `${newLeft}px`;
-        noBtn.style.top = `${newTop}px`;
+            noBtn.style.position = "fixed";
+            noBtn.style.left = `${newLeft}px`;
+            noBtn.style.top = `${newTop}px`;
             noBtn.style.display = 'flex';
             noBtn.style.visibility = 'visible';
             noBtn.style.opacity = '1';
@@ -91,6 +91,16 @@ function moveButton(e) {
 
 // Xử lý cho desktop
 document.addEventListener('mousemove', moveButton);
+
+// Thêm touch events cho mobile
+document.addEventListener('touchmove', function(e) {
+    e.preventDefault(); // Ngăn scroll khi touch
+    moveButton(e);
+}, { passive: false });
+
+document.addEventListener('touchstart', function(e) {
+    moveButton(e);
+});
 
 // Bỏ tất cả touch events và mobile effects
 // Xử lý khi xoay màn hình
