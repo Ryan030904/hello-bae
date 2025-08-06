@@ -248,24 +248,6 @@ body, html {
   color: #e0e0e0;
   font-size: 1.3em;
   margin-bottom: 0;
-  /* Đảm bảo text hiển thị rõ ràng */
-  color: #ffffff !important;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  font-weight: normal;
-  line-height: 1.5;
-  text-align: center;
-}
-
-/* Đảm bảo emoji trong result-msg hiển thị rõ */
-.result-msg .emoji {
-  font-size: 1.2em;
-  display: inline-block;
-  vertical-align: middle;
-  color: inherit;
-  background: none;
-  -webkit-text-fill-color: initial;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  filter: contrast(1.3) brightness(1.1);
 }
 
 /* ======================= MOBILE ======================= */
@@ -277,14 +259,6 @@ body, html {
     width: 95vw !important;
     padding: 20px !important;
     font-size: 1em !important;
-    /* Đảm bảo popup không di chuyển */
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    max-height: 90vh !important;
-    overflow-y: auto !important;
-    z-index: 1000 !important;
   }
 
   .popup img.dog-img {
@@ -304,6 +278,9 @@ body, html {
     height: 130px;
     gap: 16px;
     margin-top: 20px;
+    /* Đảm bảo container luôn hiển thị */
+    position: relative;
+    z-index: 10;
   }
 
   .btn, .yes-btn, .no-btn {
@@ -312,13 +289,17 @@ body, html {
     font-size: 1.05em;
     min-width: 120px;
     max-width: 200px;
+    /* Đảm bảo nút luôn hiển thị */
+    position: relative;
+    z-index: 1000;
+    /* Đảm bảo cả hai nút có kích thước bằng nhau */
+    box-sizing: border-box;
+    flex-shrink: 0;
     /* Đảm bảo kích thước cố định */
     width: 140px !important;
     height: 50px !important;
     min-width: 140px !important;
     max-width: 140px !important;
-    box-sizing: border-box;
-    flex-shrink: 0;
   }
 
   #reason-input {
@@ -326,20 +307,10 @@ body, html {
     font-size: 1em;
   }
   
-  /* Đảm bảo nút "Không" có thể di chuyển */
+  /* Đảm bảo nút không bị khuất khi di chuyển */
   .no-btn {
-    position: relative !important;
     z-index: 1000 !important;
     /* Đảm bảo nút luôn hiển thị */
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  
-  /* Khi nút được di chuyển */
-  .no-btn[style*="position: fixed"] {
-    z-index: 1001 !important;
-    /* Đảm bảo nút vẫn hiển thị */
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -360,29 +331,36 @@ body, html {
     font-size: 1.1em !important;
     margin-bottom: 1.5em;
   }
-  
-  /* Sửa icon để hiển thị rõ */
-  .emoji {
-    font-size: 1.2em !important;
-    display: inline-block !important;
-    vertical-align: middle !important;
-    filter: contrast(1.5) brightness(1.2) !important;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
-    /* Đảm bảo icon hiển thị */
-    color: inherit !important;
-    background: none !important;
-    -webkit-text-fill-color: initial !important;
+
+  /* Backup cho nút "Không" - đảm bảo luôn hiển thị */
+  .no-btn {
+    position: relative !important;
+    z-index: 1000 !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-width: 140px !important;
+    min-height: 50px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Khi nút được di chuyển */
+  .no-btn[style*="position: fixed"] {
+    z-index: 1001 !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-width: 140px !important;
+    min-height: 50px !important;
   }
   
-  /* Đảm bảo icon trong khung hiển thị rõ */
-  .shake-text .emoji {
-    font-size: 1.3em !important;
-    filter: contrast(1.8) brightness(1.3) drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.9)) !important;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1) !important;
-    /* Đảm bảo icon hiển thị */
-    color: inherit !important;
-    background: none !important;
-    -webkit-text-fill-color: initial !important;
+  /* Backup selector cho trường hợp nút bị ẩn */
+  .btn-group .btn:last-child {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-width: 140px !important;
+    min-height: 50px !important;
   }
 }
 
@@ -394,13 +372,6 @@ body, html {
   .result-popup {
     width: 98vw !important;
     padding: 15px !important;
-    /* Đảm bảo popup không di chuyển */
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    max-height: 95vh !important;
-    overflow-y: auto !important;
   }
   
   .btn-group {
@@ -427,20 +398,6 @@ body, html {
   
   .subtitle {
     font-size: 1em !important;
-  }
-  
-  /* Sửa icon cho màn hình nhỏ */
-  .emoji {
-    font-size: 1.1em !important;
-    filter: contrast(1.8) brightness(1.4) !important;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 1) !important;
-  }
-  
-  /* Đảm bảo icon trong khung hiển thị rõ trên màn hình nhỏ */
-  .shake-text .emoji {
-    font-size: 1.2em !important;
-    filter: contrast(2.0) brightness(1.5) drop-shadow(3px 3px 6px rgba(0, 0, 0, 1)) !important;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1), 0 0 8px rgba(255, 255, 255, 0.3) !important;
   }
 }
 
@@ -469,57 +426,55 @@ body, html {
   }
   
   .btn, .yes-btn, .no-btn {
-    width: 120px !important;
-    height: 45px !important;
+    width: 140px !important;
+    height: 50px !important;
     font-size: 1em !important;
-    min-width: 120px !important;
-    max-width: 120px !important;
+    min-width: 140px !important;
+    max-width: 140px !important;
     flex-shrink: 0 !important;
+    /* Đảm bảo cả hai nút có kích thước bằng nhau */
     box-sizing: border-box !important;
     padding: 0 !important;
     margin: 0 !important;
   }
   
-  /* Đảm bảo popup không di chuyển trên landscape */
-  .popup,
-  .question-page,
-  .reason-popup,
-  .result-popup {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    max-height: 90vh !important;
-    overflow-y: auto !important;
+  /* Đảm bảo nút "Không" có kích thước bằng nút "Có" */
+  .no-btn {
+    width: 140px !important;
+    height: 50px !important;
+    min-width: 140px !important;
+    max-width: 140px !important;
+    flex-shrink: 0 !important;
   }
   
-  /* Đảm bảo nút "Không" có thể di chuyển trên landscape */
+  .yes-btn {
+    width: 140px !important;
+    height: 50px !important;
+    min-width: 140px !important;
+    max-width: 140px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Backup cho nút "Không" trên landscape */
   .no-btn {
     position: relative !important;
     z-index: 1000 !important;
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
+    min-width: 140px !important;
+    min-height: 50px !important;
+    flex-shrink: 0 !important;
   }
-  
+
+  /* Khi nút được di chuyển trên landscape */
   .no-btn[style*="position: fixed"] {
     z-index: 1001 !important;
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
-  }
-  
-  /* Sửa icon cho landscape */
-  .emoji {
-    font-size: 1.1em !important;
-    filter: contrast(1.6) brightness(1.3) !important;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9) !important;
-  }
-  
-  .shake-text .emoji {
-    font-size: 1.2em !important;
-    filter: contrast(1.8) brightness(1.4) drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.9)) !important;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1) !important;
+    min-width: 140px !important;
+    min-height: 50px !important;
   }
 }
 
@@ -639,108 +594,4 @@ body, html {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-}
-
-/* CSS riêng cho dòng chữ result-msg */
-.result-msg.shake-text {
-  animation: gentleShake 2s ease-in-out infinite;
-  display: inline-block;
-  transform-origin: center;
-  font-size: 1.2em !important;
-  color: #ffffff !important;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 107, 157, 0.5);
-  font-weight: bold;
-  letter-spacing: 1px;
-  padding: 10px 20px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, rgba(255, 107, 157, 0.4), rgba(255, 143, 171, 0.4));
-  border: 2px solid rgba(255, 107, 157, 0.7);
-  /* Đảm bảo text hiển thị rõ */
-  -webkit-text-fill-color: #ffffff;
-  color: #ffffff !important;
-  /* Tăng độ tương phản */
-  filter: contrast(1.2);
-  /* Đảm bảo text không bị ẩn */
-  z-index: 10;
-  position: relative;
-  /* Thêm glow effect */
-  box-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
-  /* Thêm hiệu ứng gradient text */
-  background: linear-gradient(45deg, #ff6b9d, #ff8fab, #ff6b9d);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gentleShake 2s ease-in-out infinite, gradientShift 4s ease-in-out infinite;
-}
-
-@keyframes gentleShake {
-  0%, 100% {
-    transform: translateX(0) rotate(0deg);
-  }
-  25% {
-    transform: translateX(-1px) rotate(-0.5deg);
-  }
-  50% {
-    transform: translateX(1px) rotate(0.5deg);
-  }
-  75% {
-    transform: translateX(-1px) rotate(-0.5deg);
-  }
-}
-
-@keyframes gradientShift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-/* Hiệu ứng cho emoji trong result-msg */
-.result-msg.shake-text .emoji {
-  animation: emojiBounce 2.5s ease-in-out infinite;
-  display: inline-block;
-  transform-origin: center;
-  font-size: 1.3em;
-  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
-}
-
-@keyframes emojiBounce {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-  }
-  25% {
-    transform: translateY(-3px) scale(1.1);
-  }
-  50% {
-    transform: translateY(0) scale(1);
-  }
-  75% {
-    transform: translateY(-2px) scale(1.05);
-  }
-}
-
-/* Responsive cho result-msg */
-@media (max-width: 768px) {
-  .result-msg.shake-text {
-    font-size: 1em !important;
-    padding: 8px 15px;
-  }
-  
-  .result-msg.shake-text .emoji {
-    font-size: 1.2em;
-  }
-}
-
-@media (max-width: 480px) {
-  .result-msg.shake-text {
-    font-size: 0.9em !important;
-    padding: 6px 12px;
-  }
-  
-  .result-msg.shake-text .emoji {
-    font-size: 1.1em;
-  }
 }
