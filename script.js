@@ -10,7 +10,7 @@ document.getElementById('ok-btn').onclick = function () {
     noBtn.style.top = '';
 };
 
-// Hàm di chuyển nút với logic đơn giản và an toàn
+// Hàm di chuyển nút với logic cải thiện để không đè lên nút "Có"
 function moveButton(e) {
     const questionPage = document.querySelector('.question-page');
     if (!questionPage || questionPage.style.display !== 'flex') return;
@@ -36,8 +36,8 @@ function moveButton(e) {
         moveSound.currentTime = 0;
         moveSound.play();
         
-        // Logic đơn giản - chỉ di chuyển trong vùng an toàn
-        const safeMargin = 80; // Tăng margin để đảm bảo an toàn
+        // Logic cải thiện - đảm bảo không đè lên nút "Có"
+        const safeMargin = 80;
         const maxLeft = window.innerWidth - noRect.width - safeMargin;
         const maxTop = window.innerHeight - noRect.height - safeMargin;
         const minLeft = safeMargin;
@@ -47,14 +47,14 @@ function moveButton(e) {
         if (maxLeft > minLeft && maxTop > minTop) {
             let newLeft, newTop;
             let attempts = 0;
-            const maxAttempts = 30; // Giảm số lần thử để tránh lag
+            const maxAttempts = 50; // Tăng số lần thử để tìm vị trí tốt
             
             do {
                 newLeft = Math.random() * (maxLeft - minLeft) + minLeft;
                 newTop = Math.random() * (maxTop - minTop) + minTop;
                 attempts++;
                 
-                // Kiểm tra không chồng lên nút "Có"
+                // Tạo vùng giả định cho nút "Không" mới
                 const fakeNoRect = {
                     left: newLeft,
                     right: newLeft + noRect.width,
@@ -62,14 +62,40 @@ function moveButton(e) {
                     bottom: newTop + noRect.height
                 };
                 
-                const overlap = !(
-                    fakeNoRect.right < yesRect.left ||
-                    fakeNoRect.left > yesRect.right ||
-                    fakeNoRect.bottom < yesRect.top ||
-                    fakeNoRect.top > yesRect.bottom
+                // Kiểm tra không chồng lên nút "Có" với margin an toàn
+                const yesSafeRect = {
+                    left: yesRect.left - 20, // Thêm margin 20px
+                    right: yesRect.right + 20,
+                    top: yesRect.top - 20,
+                    bottom: yesRect.bottom + 20
+                };
+                
+                const overlapWithYes = !(
+                    fakeNoRect.right < yesSafeRect.left ||
+                    fakeNoRect.left > yesSafeRect.right ||
+                    fakeNoRect.bottom < yesSafeRect.top ||
+                    fakeNoRect.top > yesSafeRect.bottom
                 );
                 
-                if (!overlap) break;
+                // Kiểm tra không chồng lên vị trí chuột/touch
+                const mouseOverlap = (
+                    mouseX >= fakeNoRect.left &&
+                    mouseX <= fakeNoRect.right &&
+                    mouseY >= fakeNoRect.top &&
+                    mouseY <= fakeNoRect.bottom
+                );
+                
+                // Kiểm tra không quá gần nút "Có"
+                const distanceToYes = Math.hypot(
+                    (fakeNoRect.left + fakeNoRect.right) / 2 - (yesRect.left + yesRect.right) / 2,
+                    (fakeNoRect.top + fakeNoRect.bottom) / 2 - (yesRect.top + yesRect.bottom) / 2
+                );
+                const minDistanceToYes = 150; // Khoảng cách tối thiểu đến nút "Có"
+                
+                // Chỉ chấp nhận vị trí nếu không chồng lên nút "Có" và không quá gần
+                if (!overlapWithYes && !mouseOverlap && distanceToYes >= minDistanceToYes) {
+                    break;
+                }
                 
             } while (attempts < maxAttempts);
             
