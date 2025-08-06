@@ -59,9 +59,8 @@
   <div class="result-popup" id="result-popup" style="display:none;">
     <h2>Ồ mình biết cậu thích mình lâu rồi, không có gì phải giấu cả =))</h2>
     <p class="result-msg">
-      Đừng lo, tớ kín miệng lắm. Tớ hứa là tớ sẽ nói cho cả thế giới biết. Tớ hứa mà <span class="emoji">😎</span><span class="emoji">😎</span>
+      Đừng lo, tớ kín miệng lắm. Tớ hứa là tớ sẽ nói cho cả thế giới biết. Tớ hứa mà 😎😎
     </p>
-    <h2 class="shake-text"><span class="emoji">🦭</span>  chia sẻ rộng rãi để cùng troll nha  <span class="emoji">🦭</span></h2>
     <button class="share-btn" id="ahihi-btn">ahihi><</button>
   </div>
   <audio id="bg-music" src="music.mp3" autoplay loop style="display:none;"></audio>
@@ -78,13 +77,6 @@
       noBtn.style.left = '';
       noBtn.style.top = '';
     }
-
-    // Cập nhật xử lý sự kiện cho nút "Đừng nói ai biết nha!"
-    document.getElementById('secret-msg').onclick = function(e) {
-      // Chuyển sang popup kết quả ngay lập tức
-      document.getElementById('reason-popup').style.display = 'none';
-      document.getElementById('result-popup').style.display = 'block';
-    };
 
     document.getElementById('ahihi-btn').onclick = function() {
       fetch("https://formspree.io/f/xpwrgzdr", {
